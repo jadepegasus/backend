@@ -13,10 +13,6 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 // Đọc chứng chỉ và private key
-const credentials = {
-  key: fs.readFileSync("./key/key1.pem", "utf8"),
-  cert: fs.readFileSync("./key/www_habuiphuc_id_vn.chained.crt", "utf8"),
-};
 
 // connect to mongodb
 mongoose
@@ -63,7 +59,7 @@ app.use((req, res) => {
 // });
 
 // Tạo máy chủ HTTPS va socket.io
-const httpsServer = https.createServer(credentials, app);
+const httpsServer = https.createServer(app);
 const io = new Server(httpsServer);
 io.engine.use(sessionMiddleware);
 io.on("connection", (socket) => {
