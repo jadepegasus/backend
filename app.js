@@ -39,7 +39,7 @@ app.use(
   cors({
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     origin: 'https://frontend-social-r1ky.onrender.com',
-    credentials: true
+    credentials: false
   })
 );
 app.use(express.json());
@@ -74,8 +74,8 @@ app.use((req, res) => {
 const httpsServer = https.createServer(credentials, app);
 const io = new Server(httpsServer, {
   cors: {
-    origin: true,
-    credentials: true
+    origin: 'https://frontend-social-r1ky.onrender.com',
+    credentials: false
   },
 });
 io.engine.use(sessionMiddleware);
