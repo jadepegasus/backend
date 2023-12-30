@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.76392a51.css",
+    "main.js": "/static/js/main.fe99a390.js",
+    "static/media/backgound-thienha.jpg": "/static/media/backgound-thienha.c671d91248511e3ca20d.jpg",
+    "index.html": "/index.html",
+    "main.76392a51.css.map": "/static/css/main.76392a51.css.map",
+    "main.fe99a390.js.map": "/static/js/main.fe99a390.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.76392a51.css",
+    "static/js/main.fe99a390.js"
+  ]
+}
