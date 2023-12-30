@@ -38,7 +38,7 @@ app.use((req, res, next) => {
 app.use(
   cors({
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    origin: true,
+    origin: 'https://frontend-social-r1ky.onrender.com',
     credentials: true
   })
 );
