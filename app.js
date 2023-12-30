@@ -66,8 +66,9 @@ app.use((req, res) => {
 const httpsServer = https.createServer(credentials, app);
 const io = new Server(httpsServer, {
   cors: {
-    origin: true,
-    credentials: true
+    origin: 'https://frontend-social-r1ky.onrender.com', // Đặt origin của frontend của bạn
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true, // Bật sử dụng cookies và các header khác với credentials
   },
 });
 io.engine.use(sessionMiddleware);
