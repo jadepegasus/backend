@@ -64,13 +64,7 @@ app.use((req, res) => {
 
 // Tạo máy chủ HTTPS va socket.io
 const httpsServer = https.createServer(credentials, app);
-const io = new Server(httpsServer, {
-  cors: {
-    origin: 'https://frontend-social-r1ky.onrender.com', // Đặt origin của frontend của bạn
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true, // Bật sử dụng cookies và các header khác với credentials
-  },
-});
+const io = new Server(httpsServer);
 io.engine.use(sessionMiddleware);
 io.on("connection", (socket) => {
   // console.log('new user')
