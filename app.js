@@ -29,17 +29,7 @@ const app = express();
 
 // link mac dinh
 app.use(express.static("public"));
-app.get('/logined', (req, res) => {
-  res.header('Access-Control-Allow-Origin', 'https://frontend-social-r1ky.onrender.com');
-  // Các xử lý khác ở đây
-});
-app.use(
-  cors({
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    origin: 'https://frontend-social-r1ky.onrender.com',
-    credentials: false
-  })
-);
+app.use(cors());
 app.use(express.json());
 //session
 const sessionMiddleware = session({
@@ -64,53 +54,11 @@ app.use("/", Router);
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'))
 })
-// app.listen(process.env.PORT || 8080, () => {
-//   console.log(`Server is running on port ${process.env.PORT || 8080}`);
-// });
+app.listen(process.env.PORT || 8080, () => {
+  console.log(`Server is running on port ${process.env.PORT || 8080}`);
+});
 
 // Tạo máy chủ HTTPS va socket.io
-const httpsServer = https.createServer(credentials, app);
-const io = new Server(httpsServer, {
-  cors: {
-    origin: 'https://frontend-social-r1ky.onrender.com',
-    credentials: false
-  },
-});
-io.engine.use(sessionMiddleware);
-io.on("connection", (socket) => {
-  // console.log('new user')
-  let user_id = null;
-  socket.on("active", (_id) => {
-    user_id = _id;
-    if (user_id) {
-      UserService.setActived(user_id);
-      socket.join(user_id);
-    }
-  });
-  socket.on("notify", (data) => {
-    socket.to(data?.user_two_id).emit("notify", data.message);
-  });
-  socket.on('entering', ({ sender, receiver }) => {
-    socket.to(receiver).emit('entering', { sender, receiver })
-  })
-  socket.on('onmessage', (message) => {
-    socket.to(message?.receiver).emit('onmessage', message)
-  })
-  socket.on('newmessage', ({ receiver, message }) => {
-    socket.to(receiver).emit('newmessage', message)
-  })
-  socket.on("disconnect", () => {
-    setTimeout(() => {
-      if (user_id && !io.sockets.adapter.rooms.get(user_id)) {
-        UserService.unActived(user_id);
-      }
-    }, 5000);
-  });
-});
 
-httpsServer.listen(process.env.PORT || 8080, () => {
-  console.log(httpsServer.address())
-  console.log(`Server running on port ${process.env.PORT || 8080}`);
-});
 
 module.exports = app;
