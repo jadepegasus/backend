@@ -29,7 +29,10 @@ const app = express();
 
 // link mac dinh
 app.use(express.static("public"));
-app.use(cors());
+app.use(cors({
+  origin: 'https://frontend-social-r1ky.onrender.com', // Đặt origin của frontend của bạn
+  credentials: true, // Bật sử dụng cookies và các header khác với credentials
+}));
 app.use(express.json());
 //session
 const sessionMiddleware = session({
