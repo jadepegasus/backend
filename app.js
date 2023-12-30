@@ -31,6 +31,7 @@ const app = express();
 app.use(express.static("public"));
 app.use(cors({
   origin: 'https://frontend-social-r1ky.onrender.com', // Đặt origin của frontend của bạn
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true, // Bật sử dụng cookies và các header khác với credentials
 }));
 app.use(express.json());
