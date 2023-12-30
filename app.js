@@ -13,10 +13,10 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 // Đọc chứng chỉ và private key
-// const credentials = {
-//   key: fs.readFileSync("./key/key1.pem", "utf8"),
-//   cert: fs.readFileSync("./key/www_habuiphuc_id_vn.chained.crt", "utf8"),
-// };
+const credentials = {
+  key: fs.readFileSync("./key/key1.pem", "utf8"),
+  cert: fs.readFileSync("./key/www_habuiphuc_id_vn.chained.crt", "utf8"),
+};
 
 // connect to mongodb
 mongoose
